@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Loader } from "./Loader.js";
 import { ErrorMessage } from "./ErrorMessage.js";
 import { NavBar } from "./NavBar.js";
@@ -19,7 +19,10 @@ export const KEY = "35813d51";
 
 export default function App() {
   const [movies, setMovies] = useState([]);
-  const [watched, setWatched] = useState([]);
+  const [watched, setWatched] = useState(function () {
+    const storedVal = localStorage.getItem("watched");
+    return JSON.parse(storedVal);
+  });
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState("");
   const [selectedId, setSelectedId] = useState(null);
@@ -76,6 +79,13 @@ export default function App() {
       controller.abort();
     };
   }
+
+  useEffect(
+    function () {
+      localStorage.setItem("watched", JSON.stringify(watched));
+    },
+    [watched]
+  );
 
   return (
     <>
