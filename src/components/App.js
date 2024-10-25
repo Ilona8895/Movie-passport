@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { Loader } from "./Loader.js";
 import { ErrorMessage } from "./ErrorMessage.js";
 import { NavBar } from "./NavBar.js";
@@ -11,6 +11,7 @@ import { MovieList } from "./MovieList.js";
 import { MovieDetails } from "./MovieDetails.js";
 import { WatchedSummary } from "./WatchedSummary.js";
 import { WatchedMovieList } from "./WatchedMovieList.js";
+import { useLocalStorage } from "./useLocalStorage.js";
 
 export const average = (arr) =>
   arr.reduce((acc, cur, i, arr) => acc + cur / arr.length, 0);
@@ -19,13 +20,10 @@ export const KEY = "35813d51";
 
 export default function App() {
   const [movies, setMovies] = useState([]);
-  const [watched, setWatched] = useState(function () {
-    const storedVal = localStorage.getItem("watched");
-    return JSON.parse(storedVal);
-  });
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState("");
   const [selectedId, setSelectedId] = useState(null);
+  const [watched, setWatched] = useLocalStorage([], "watched");
 
   function handleSelectMovie(id) {
     setSelectedId((selectedId) => (selectedId === id ? null : id));
@@ -79,13 +77,6 @@ export default function App() {
       controller.abort();
     };
   }
-
-  useEffect(
-    function () {
-      localStorage.setItem("watched", JSON.stringify(watched));
-    },
-    [watched]
-  );
 
   return (
     <>

@@ -3,6 +3,7 @@ import { KEY } from "./App";
 import { ErrorMessage } from "./ErrorMessage";
 import { Loader } from "./Loader";
 import StarRating from "./StarRating";
+import { useKey } from "./useKey";
 
 export function MovieDetails({
   selectedId,
@@ -50,21 +51,7 @@ export function MovieDetails({
     onCloseMovie();
   }
 
-  useEffect(
-    function () {
-      function goBackToMenu(e) {
-        if (e.code === "Escape") {
-          onCloseMovie();
-        }
-      }
-      document.addEventListener("keydown", goBackToMenu);
-
-      return function () {
-        document.removeEventListener("keydown", goBackToMenu);
-      };
-    },
-    [onCloseMovie]
-  );
+  useKey("Escape", onCloseMovie);
 
   useEffect(
     function () {
