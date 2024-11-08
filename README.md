@@ -1,6 +1,6 @@
 # MoviePassport
 
-Search and rate your favourite movies. Data about rated movies is stored in LocalStorage.
+Search and rate your favourite movies. Data about rated movies are stored in LocalStorage.
 
 ## Available Scripts
 
