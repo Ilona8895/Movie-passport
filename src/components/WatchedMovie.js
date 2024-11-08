@@ -1,4 +1,7 @@
-export function WatchedMovie({ movie, onDeleteWatched }) {
+import { useMovies } from "../contexts/MoviesContext";
+
+export function WatchedMovie({ movie }) {
+  const { deleteWatched } = useMovies();
   return (
     <li key={movie.imdbID}>
       <img src={movie.poster} alt={`${movie.title} poster`} />
@@ -18,7 +21,7 @@ export function WatchedMovie({ movie, onDeleteWatched }) {
         </p>
         <button
           className="btn-delete"
-          onClick={() => onDeleteWatched(movie.imdbID)}
+          onClick={() => deleteWatched(movie.imdbID)}
         >
           X
         </button>

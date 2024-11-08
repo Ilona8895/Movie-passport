@@ -1,12 +1,15 @@
 import { useRef, useState } from "react";
-import { useKey } from "./useKey";
+import { useKey } from "../hooks/useKey";
+import { useMovies } from "../contexts/MoviesContext";
 
-export function Search({ onSearchMovie }) {
+export function Search() {
   const [query, setQuery] = useState("");
+
+  const { searchMovie } = useMovies();
 
   function handleOnChange(query) {
     setQuery(query);
-    onSearchMovie(query);
+    searchMovie(query);
   }
 
   const inputElement = useRef(null);

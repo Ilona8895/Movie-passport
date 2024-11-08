@@ -3,14 +3,11 @@ import { KEY } from "./App";
 import { ErrorMessage } from "./ErrorMessage";
 import { Loader } from "./Loader";
 import StarRating from "./StarRating";
-import { useKey } from "./useKey";
+import { useKey } from "../hooks/useKey";
+import { useMovies } from "../contexts/MoviesContext";
 
-export function MovieDetails({
-  selectedId,
-  onCloseMovie,
-  onAddWatched,
-  watched,
-}) {
+export function MovieDetails() {
+  const { selectedId, closeMovie, addWatched, watched } = useMovies();
   const [movie, setMovie] = useState({});
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState("");
@@ -47,11 +44,11 @@ export function MovieDetails({
       userRating,
     };
 
-    onAddWatched(newWatchedMovie);
-    onCloseMovie();
+    addWatched(newWatchedMovie);
+    closeMovie();
   }
 
-  useKey("Escape", onCloseMovie);
+  useKey("Escape", closeMovie);
 
   useEffect(
     function () {
@@ -97,7 +94,7 @@ export function MovieDetails({
       {!isLoading && !error && (
         <>
           <header>
-            <button className="btn-back" onClick={onCloseMovie}>
+            <button className="btn-back" onClick={closeMovie}>
               &larr;
             </button>
             <img src={poster} alt={`${movie} poster`} />

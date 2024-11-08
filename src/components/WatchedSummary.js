@@ -1,6 +1,8 @@
+import { useMovies } from "../contexts/MoviesContext";
 import { average } from "./App";
 
-export function WatchedSummary({ watched }) {
+export function WatchedSummary() {
+  const { watched } = useMovies();
   const avgImdbRating = average(watched.map((movie) => movie.imdbRating));
   const avgUserRating = average(watched.map((movie) => movie.userRating));
   const avgRuntime = average(watched.map((movie) => movie.runtime));

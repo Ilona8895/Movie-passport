@@ -1,14 +1,12 @@
+import { useMovies } from "../contexts/MoviesContext";
 import { WatchedMovie } from "./WatchedMovie";
 
-export function WatchedMovieList({ watched, onDeleteWatched }) {
+export function WatchedMovieList() {
+  const { watched } = useMovies();
   return (
     <ul className="list">
       {watched.map((movie) => (
-        <WatchedMovie
-          movie={movie}
-          key={movie.imdbID}
-          onDeleteWatched={onDeleteWatched}
-        />
+        <WatchedMovie movie={movie} key={movie.imdbID} />
       ))}
     </ul>
   );
