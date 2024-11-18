@@ -14,9 +14,6 @@ import { useMovies } from "../contexts/MoviesContext.js";
 
 export const KEY = "35813d51";
 
-export const average = (arr) =>
-  arr.reduce((acc, cur, i, arr) => acc + cur / arr.length, 0);
-
 export default function App() {
   const { isLoading, error, selectedId } = useMovies();
   return (

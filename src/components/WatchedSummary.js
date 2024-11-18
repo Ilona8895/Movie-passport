@@ -1,5 +1,5 @@
 import { useMovies } from "../contexts/MoviesContext";
-import { average } from "./App";
+import { average } from "../utils/helpers";
 
 export function WatchedSummary() {
   const { watched } = useMovies();
